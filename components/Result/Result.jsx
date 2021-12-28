@@ -1,4 +1,6 @@
 import useSWR from "swr";
+
+import styles from "../../styles/Home.module.css";
 const getAge = (year) => {
   return new Date().getFullYear() - Math.floor(year);
 };
@@ -21,7 +23,7 @@ export const Result = (props) => {
   if (result.error) return "une erreur s'est produite";
   if (!result.data) return "En chargement...";
   return (
-    <span>
+    <span className={styles.resultLine}>
       {result.data.error
         ? result.data.error
         : `${getAge(result.data.average)} ans`}

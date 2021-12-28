@@ -16,16 +16,16 @@ export default function Home(props) {
       </Head>
 
       <main className={styles.main}>
-        <h3 className={styles.title}>AVERAGE AGE CALCULATOR</h3>
+        <h1 className={styles.title}>AVERAGE AGE CALCULATOR</h1>
         <div className={styles.grid}>
-          <div className={styles.card}>
+          <div className={styles.userList}>
             <UserList
               setSelectedUsers={setSelectedUsers}
               users={props.data}
               selectedUsers={selectedUsers}
             />
           </div>
-          <div className={styles.card}>
+          <div className={styles.result}>
             <Image
               src="/birthday-cake-cake-svgrepo-com.svg"
               width={72}
