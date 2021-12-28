@@ -3,11 +3,6 @@ import styles from "../../styles/Home.module.css";
 import { UserBar } from "../UserBar";
 
 export const UserList = (props) => {
-  const [activeUsers, setActiveUsers] = useState([]);
-  useEffect(() => {
-    props.setSelectedUsers(activeUsers);
-  });
-
   return (
     <div className={styles.list}>
       {props.users.map((user, key) => {
@@ -15,8 +10,8 @@ export const UserList = (props) => {
           <UserBar
             key={key}
             id={user.id}
-            setSelected={setActiveUsers}
-            users={activeUsers}
+            setSelected={props.setSelectedUsers}
+            users={props.selectedUsers}
           >
             {user.name}
           </UserBar>

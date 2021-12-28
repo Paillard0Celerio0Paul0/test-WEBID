@@ -1,16 +1,30 @@
 import useSWR from "swr";
-
 const getAge = (year) => {
-  return 2022 - Math.floor(year);
+  return new Date().getFullYear() - Math.floor(year);
 };
+
+const areSelectedUsers = (users) => {
+  return users.length !== 0;
+};
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
 export const Result = (props) => {
-  const fetcher = (url) => fetch(url).then((res) => res.json());
-  const { data, error } = useSWR(
-    `https://infallible-tereshkova-717266.netlify.app/.netlify/functions/server/average?ids=${props.users}`,
+  const result = useSWR(
+    areSelectedUsers(props.users)
+      ? `https://infallible-tereshkova-717266.netlify.app/.netlify/functions/server/average?ids=${props.users}`
+      : null,
     fetcher
   );
+
   if (props.users.length === 0) return "Aucun utilisateur séléctionné";
-  if (error) return "une erreur s'est produite";
-  if (!data) return "En chargement...";
-  return <span>{data.error ? data.error : `${getAge(data.average)} ans`}</span>;
+  if (result.error) return "une erreur s'est produite";
+  if (!result.data) return "En chargement...";
+  return (
+    <span>
+      {result.data.error
+        ? result.data.error
+        : `${getAge(result.data.average)} ans`}
+    </span>
+  );
 };

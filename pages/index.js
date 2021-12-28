@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function Home(props) {
   const [selectedUsers, setSelectedUsers] = useState([]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -18,13 +19,18 @@ export default function Home(props) {
         <h3 className={styles.title}>AVERAGE AGE CALCULATOR</h3>
         <div className={styles.grid}>
           <div className={styles.card}>
-            <UserList setSelectedUsers={setSelectedUsers} users={props.data} />
+            <UserList
+              setSelectedUsers={setSelectedUsers}
+              users={props.data}
+              selectedUsers={selectedUsers}
+            />
           </div>
           <div className={styles.card}>
             <Image
               src="/birthday-cake-cake-svgrepo-com.svg"
               width={72}
               height={72}
+              alt="birthday cake logo"
             />
             <span>Âge moyen des personnes séléctionnées</span>
             <Result users={selectedUsers} />
